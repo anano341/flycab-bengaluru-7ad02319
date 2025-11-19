@@ -89,26 +89,33 @@ const Index = () => {
   if (stage === "confirmed") {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-hero p-4">
-        <div className="max-w-2xl w-full text-center space-y-6 animate-fade-in-up">
-          <div className="inline-flex items-center justify-center w-24 h-24 bg-success rounded-full mb-4">
-            <CheckCircle2 className="w-12 h-12 text-success-foreground" />
+        <div className="max-w-2xl w-full text-center space-y-8">
+          <div className="inline-flex items-center justify-center w-32 h-32 bg-success rounded-full mb-4 animate-scale-in shadow-glow">
+            <CheckCircle2 className="w-16 h-16 text-success-foreground animate-pulse" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white">
+          <h1 className="text-5xl md:text-6xl font-bold text-white animate-slide-up">
             Booking Confirmed!
           </h1>
-          <p className="text-xl text-white/90">
+          <p className="text-xl md:text-2xl text-white/90 animate-slide-up" style={{ animationDelay: "0.1s" }}>
             Your flying taxi will arrive shortly at your pickup location.
           </p>
-          <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-white/20 space-y-3 text-white">
-            <div className="text-sm text-white/80">Flight Distance</div>
-            <div className="text-2xl font-bold">{booking.distance?.toFixed(2)} km</div>
-            <div className="text-sm text-white/80">Total Fare</div>
-            <div className="text-3xl font-bold">₹{booking.price}</div>
+          <div className="bg-white/10 backdrop-blur-md rounded-2xl p-8 border border-white/20 space-y-4 text-white animate-slide-up hover:bg-white/15 transition-colors" style={{ animationDelay: "0.2s" }}>
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <div className="text-sm text-white/70 mb-2">Flight Distance</div>
+                <div className="text-3xl font-bold">{booking.distance?.toFixed(2)} km</div>
+              </div>
+              <div>
+                <div className="text-sm text-white/70 mb-2">Total Fare</div>
+                <div className="text-3xl font-bold">₹{booking.price}</div>
+              </div>
+            </div>
           </div>
           <Button
             onClick={handleNewBooking}
             size="lg"
-            className="bg-white text-primary hover:bg-white/90"
+            className="bg-white text-primary hover:bg-white/90 px-8 py-6 text-lg hover:scale-105 transition-transform animate-slide-up"
+            style={{ animationDelay: "0.3s" }}
           >
             Book Another Flight
           </Button>
@@ -119,13 +126,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="border-b bg-card/50 backdrop-blur-sm sticky top-0 z-10">
+      <header className="border-b bg-card/80 backdrop-blur-md sticky top-0 z-10 shadow-sm animate-slide-down">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setStage("hero")}
+              className="hover:scale-105 transition-transform"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
@@ -144,7 +152,7 @@ const Index = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
             <section>
-              <h2 className="text-2xl font-bold mb-4">Select Route</h2>
+              <h2 className="text-2xl font-bold mb-4 animate-fade-in">Select Route</h2>
               <TaxiMap
                 onStartSelect={handleStartSelect}
                 onDestinationSelect={handleDestinationSelect}

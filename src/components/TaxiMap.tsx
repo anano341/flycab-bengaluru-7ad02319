@@ -172,7 +172,7 @@ export const TaxiMap = ({
   }, [selectingStart, selectingDestination]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 animate-fade-in">
       <div className="flex gap-3 flex-wrap">
         <Button
           onClick={() => {
@@ -181,7 +181,7 @@ export const TaxiMap = ({
             toast.info("Click on the map to select pickup location");
           }}
           variant={selectingStart ? "default" : "outline"}
-          className="flex-1"
+          className="flex-1 hover:scale-105 transition-transform"
         >
           <MapPin className="w-4 h-4 mr-2" />
           {start ? "Change Pickup" : "Select Pickup"}
@@ -193,7 +193,7 @@ export const TaxiMap = ({
             toast.info("Click on the map to select destination");
           }}
           variant={selectingDestination ? "default" : "outline"}
-          className="flex-1"
+          className="flex-1 hover:scale-105 transition-transform"
           disabled={!start}
         >
           <Navigation className="w-4 h-4 mr-2" />
@@ -203,7 +203,7 @@ export const TaxiMap = ({
 
       <div
         ref={mapRef}
-        className="w-full h-[500px] rounded-lg border-2 border-border shadow-card overflow-hidden"
+        className="w-full h-[500px] rounded-xl border-2 border-border shadow-card overflow-hidden hover:shadow-glow transition-shadow duration-300"
       />
 
       {(selectingStart || selectingDestination) && (
