@@ -28,37 +28,37 @@ export const BookingSummary = ({ booking, onConfirm, onReset }: BookingSummaryPr
 
   if (!isComplete) {
     return (
-      <Card className="shadow-card">
+      <Card className="shadow-card backdrop-blur-sm bg-card/95 animate-fade-in">
         <CardHeader>
           <CardTitle>Booking Summary</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
+          <div className="space-y-3 text-sm">
+            <div className="flex items-center gap-2 transition-all duration-300">
               {booking.start ? (
-                <Badge variant="secondary" className="gap-1">
+                <Badge variant="secondary" className="gap-1 animate-scale-in">
                   <MapPin className="w-3 h-3" /> Pickup set
                 </Badge>
               ) : (
-                <span>• Select pickup location</span>
+                <span className="text-muted-foreground">• Select pickup location</span>
               )}
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 transition-all duration-300">
               {booking.destination ? (
-                <Badge variant="secondary" className="gap-1">
+                <Badge variant="secondary" className="gap-1 animate-scale-in">
                   <Navigation className="w-3 h-3" /> Destination set
                 </Badge>
               ) : (
-                <span>• Select destination</span>
+                <span className="text-muted-foreground">• Select destination</span>
               )}
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 transition-all duration-300">
               {booking.selectedTier ? (
-                <Badge variant="secondary" className="gap-1">
+                <Badge variant="secondary" className="gap-1 animate-scale-in">
                   <Plane className="w-3 h-3" /> {tierInfo?.name} selected
                 </Badge>
               ) : (
-                <span>• Choose taxi tier</span>
+                <span className="text-muted-foreground">• Choose taxi tier</span>
               )}
             </div>
           </div>
@@ -68,11 +68,11 @@ export const BookingSummary = ({ booking, onConfirm, onReset }: BookingSummaryPr
   }
 
   return (
-    <Card className="shadow-glow border-primary/20">
+    <Card className="shadow-glow border-primary/20 backdrop-blur-sm bg-card/95 animate-scale-in">
       <CardHeader>
         <CardTitle className="flex items-center justify-between">
           <span>Booking Summary</span>
-          <Badge variant="default" className="gap-1">
+          <Badge variant="default" className="gap-1 animate-pulse">
             <Plane className="w-3 h-3" />
             Ready to Fly
           </Badge>
@@ -141,10 +141,10 @@ export const BookingSummary = ({ booking, onConfirm, onReset }: BookingSummaryPr
         </div>
 
         <div className="flex gap-2">
-          <Button onClick={onReset} variant="outline" className="flex-1">
+          <Button onClick={onReset} variant="outline" className="flex-1 hover:scale-105 transition-transform">
             Reset
           </Button>
-          <Button onClick={onConfirm} className="flex-1 shadow-glow">
+          <Button onClick={onConfirm} className="flex-1 shadow-glow hover:scale-105 transition-transform">
             Confirm Booking
           </Button>
         </div>
