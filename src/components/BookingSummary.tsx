@@ -6,6 +6,8 @@ import { BookingDetails, TAXI_TIERS } from "@/types/taxi";
 import { formatDistance } from "@/lib/distance";
 import { formatPrice, calculateEstimatedTime, formatTime } from "@/lib/pricing";
 import { MapPin, Navigation, Clock, Plane } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface BookingSummaryProps {
   booking: BookingDetails;
@@ -26,6 +28,27 @@ export const BookingSummary = ({ booking, onConfirm, onReset }: BookingSummaryPr
       ? calculateEstimatedTime(booking.distance, booking.selectedTier)
       : null;
 
+  const handleConfirm = async () => {
+    if (!booking.start || !booking.destination) {
+      return;
+    }
+    try {
+      const { error } = await supabase
+        .from('rides')
+        .insert({
+          start_location: `${booking.start.lat}, ${booking.start.lng}`,
+          end_location: `${booking.destination.lat}, ${booking.destination.lng}`
+        });
+
+      if (error) {
+        throw error;
+      }
+      onConfirm();
+    } catch (error: any) {
+      toast.error('Booking failed', { description: error.message });
+    }
+  };
+  
   if (!isComplete) {
     return (
       <Card className="shadow-card backdrop-blur-sm bg-card/95 animate-fade-in">
@@ -144,7 +167,7 @@ export const BookingSummary = ({ booking, onConfirm, onReset }: BookingSummaryPr
           <Button onClick={onReset} variant="outline" className="flex-1 hover:scale-105 transition-transform">
             Reset
           </Button>
-          <Button onClick={onConfirm} className="flex-1 shadow-glow hover:scale-105 transition-transform">
+          <Button onClick={handleConfirm} className="flex-1 shadow-glow hover:scale-105 transition-transform">
             Confirm Booking
           </Button>
         </div>

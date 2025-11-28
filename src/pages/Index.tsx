@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Hero } from "@/components/Hero";
 import { TaxiMap } from "@/components/TaxiMap";
 import { TierSelector } from "@/components/TierSelector";
@@ -142,8 +143,13 @@ const Index = () => {
               FlyCab
             </h1>
           </div>
-          <div className="text-sm text-muted-foreground">
-            Bengaluru, Karnataka
+          <div className="flex items-center gap-4">
+            <Link to="/ride-details">
+              <Button variant="outline">View Ride Details</Button>
+            </Link>
+            <div className="text-sm text-muted-foreground">
+              Bengaluru, Karnataka
+            </div>
           </div>
         </div>
       </header>
